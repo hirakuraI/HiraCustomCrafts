@@ -3,7 +3,7 @@ package com.hirakurai.hiracustomcrafts.util.recipesConfigurators;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.hirakurai.hiracustomcrafts.HiraCustomCrafts;
-import com.hirakurai.hiracustomcrafts.models.ShapedRecipeData;
+import com.hirakurai.hiracustomcrafts.models.recipeDTO.ShapedRecipeDTO;
 import com.hirakurai.hiracustomcrafts.util.JsonConfigurator;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
@@ -16,8 +16,8 @@ import java.util.List;
 
 public class ShapedRecipeConfigurator implements JsonConfigurator {
     private Gson gson = new GsonBuilder().setPrettyPrinting().create();
-    private File file = new File("./plugins/HiraCustomCrafts/CraftRecipes/ShapedRecipesData.json");
-    private List<ShapedRecipeData> itemShapedRecipeDataList;
+    private File file = new File("./plugins/HiraCustomCrafts/CraftRecipes/ShapedRecipes/ShapedRecipesData.json");
+    private List<ShapedRecipeDTO> itemShapedRecipeDataList;
 
     public ShapedRecipeConfigurator() {
         reload();
@@ -27,16 +27,12 @@ public class ShapedRecipeConfigurator implements JsonConfigurator {
     public void reload() {
         if (!file.exists()) {
             try {
-                if (!file.getParentFile().getParentFile().exists()) {
-                    file.getParentFile().getParentFile().mkdir();
-                }
-                if (!file.getParentFile().exists()) {
-                    file.getParentFile().mkdir();
-                }
+                createDataFolder();
+
                 file.createNewFile();
-                List<ShapedRecipeData> itemShapedRecipeDataListExample = new ArrayList<>(
+                List<ShapedRecipeDTO> itemShapedRecipeDataListExample = new ArrayList<>(
                         Arrays.asList(
-                                new ShapedRecipeData("test_item_key1",
+                                new ShapedRecipeDTO("test_item_key1",
                                         "L L",
                                         "BBB",
                                         "BBB",
@@ -51,7 +47,7 @@ public class ShapedRecipeConfigurator implements JsonConfigurator {
                                                 "TestItemLore2"
                                         )
                                 ),
-                                new ShapedRecipeData("test_item_key2",
+                                new ShapedRecipeDTO("test_item_key2",
                                         "LLL",
                                         "BLB",
                                         "BCB",
@@ -86,10 +82,16 @@ public class ShapedRecipeConfigurator implements JsonConfigurator {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-        itemShapedRecipeDataList = new ArrayList<>(Arrays.asList(gson.fromJson(reader, ShapedRecipeData[].class)));
+        itemShapedRecipeDataList = new ArrayList<>(Arrays.asList(gson.fromJson(reader, ShapedRecipeDTO[].class)));
     }
 
-    public List<ShapedRecipeData> getItemShapedRecipeDataList() {
+    private void createDataFolder() {
+        if (!file.getParentFile().exists()) {
+            file.getParentFile().mkdirs();
+        }
+    }
+
+    public List<ShapedRecipeDTO> getItemShapedRecipeDataList() {
         return itemShapedRecipeDataList;
     }
 }

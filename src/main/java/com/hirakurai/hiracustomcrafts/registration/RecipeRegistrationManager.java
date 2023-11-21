@@ -1,8 +1,8 @@
 package com.hirakurai.hiracustomcrafts.registration;
 
 import com.hirakurai.hiracustomcrafts.HiraCustomCrafts;
-import com.hirakurai.hiracustomcrafts.models.ShapedRecipeData;
-import com.hirakurai.hiracustomcrafts.models.recipeData.RecipeGeneralData;
+import com.hirakurai.hiracustomcrafts.models.recipeDTO.ShapedRecipeDTO;
+import com.hirakurai.hiracustomcrafts.models.recipeDTO.RecipeGeneralDTO;
 import com.hirakurai.hiracustomcrafts.util.tools.StringHelper;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -17,12 +17,12 @@ import java.util.List;
 import java.util.Set;
 
 public class RecipeRegistrationManager {
-    public static void registerShapedRecipes(List<ShapedRecipeData> shapedRecipeDataList){
-        for (ShapedRecipeData shapedRecipeData : shapedRecipeDataList) {
+    public static void registerShapedRecipes(List<ShapedRecipeDTO> shapedRecipeDataList){
+        for (ShapedRecipeDTO shapedRecipeData : shapedRecipeDataList) {
             registerShapedRecipe(shapedRecipeData);
         }
     }
-    public static void registerShapedRecipe(ShapedRecipeData itemRecipeData){
+    public static void registerShapedRecipe(ShapedRecipeDTO itemRecipeData){
         ItemStack resultItem = prepareResultItem(itemRecipeData);
         ShapedRecipe recipe = new ShapedRecipe(new NamespacedKey(HiraCustomCrafts.getPlugin(), itemRecipeData.getRecipeKey()), resultItem);
         if(itemRecipeData.getItemCraftRecipeBottomLine().equals("   ")){
@@ -49,7 +49,7 @@ public class RecipeRegistrationManager {
         Bukkit.getServer().addRecipe(recipe);
     }
 
-    public static ItemStack prepareResultItem(RecipeGeneralData itemRecipeData){
+    public static ItemStack prepareResultItem(RecipeGeneralDTO itemRecipeData){
         ItemStack resultItem = new ItemStack(itemRecipeData.getResultItemMaterial());
         ItemMeta resultItemMeta = resultItem.getItemMeta();
         resultItemMeta.setDisplayName(StringHelper.color(itemRecipeData.getResultItemName()));

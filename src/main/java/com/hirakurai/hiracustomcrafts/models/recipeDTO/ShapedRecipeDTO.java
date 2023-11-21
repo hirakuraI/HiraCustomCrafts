@@ -1,26 +1,25 @@
-package com.hirakurai.hiracustomcrafts.models;
+package com.hirakurai.hiracustomcrafts.models.recipeDTO;
 
-import com.hirakurai.hiracustomcrafts.models.recipeData.RecipeGeneralData;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 
 import java.util.HashMap;
 import java.util.List;
 
-public class ShapedRecipeData extends RecipeGeneralData {
+public class ShapedRecipeDTO extends RecipeGeneralDTO {
     private String craftRecipeUpperLine;
     private String craftRecipeMiddleLine;
     private String craftRecipeBottomLine;
     private HashMap<Character, NamespacedKey> craftIngredients;
 
-    public ShapedRecipeData(String recipeKey,
-                                String craftRecipeUpperLine,
-                                String craftRecipeMiddleLine,
-                                String craftRecipeBottomLine,
-                                HashMap<Character, NamespacedKey> craftIngredients,
-                                Material resultItemMaterial,
-                                String resultItemName,
-                                List<String> resultItemLore) {
+    public ShapedRecipeDTO(String recipeKey,
+                           String craftRecipeUpperLine,
+                           String craftRecipeMiddleLine,
+                           String craftRecipeBottomLine,
+                           HashMap<Character, NamespacedKey> craftIngredients,
+                           Material resultItemMaterial,
+                           String resultItemName,
+                           List<String> resultItemLore) {
         super(recipeKey, resultItemMaterial, resultItemName, resultItemLore);
         this.craftRecipeUpperLine = craftRecipeUpperLine;
         this.craftRecipeMiddleLine = craftRecipeMiddleLine;

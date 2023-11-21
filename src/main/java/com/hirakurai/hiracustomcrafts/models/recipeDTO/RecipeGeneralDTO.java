@@ -1,16 +1,16 @@
-package com.hirakurai.hiracustomcrafts.models.recipeData;
+package com.hirakurai.hiracustomcrafts.models.recipeDTO;
 
 import org.bukkit.Material;
 
 import java.util.List;
 
-public abstract class RecipeGeneralData {
+public abstract class RecipeGeneralDTO {
     private String recipeKey;
     private Material resultItemMaterial;
     private String resultItemName;
     private List<String> resultItemLore;
     private Boolean protectionChanged;
-    public RecipeGeneralData(String recipeKey, Material resultItemMaterial, String resultItemName, List<String> resultItemLore) {
+    public RecipeGeneralDTO(String recipeKey, Material resultItemMaterial, String resultItemName, List<String> resultItemLore) {
         this.recipeKey = recipeKey;
         this.resultItemMaterial = resultItemMaterial;
         this.resultItemName = resultItemName;
