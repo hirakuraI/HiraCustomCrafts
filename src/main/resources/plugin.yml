@@ -1,0 +1,4 @@
+name: HiraCustomCrafts
+version: '${project.version}'
+main: com.hirakurai.hiracustomcrafts.HiraCustomCrafts
+api-version: '1.20'
