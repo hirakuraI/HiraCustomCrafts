@@ -9,7 +9,7 @@ public abstract class RecipeGeneralDTO {
     private Material resultItemMaterial;
     private String resultItemName;
     private List<String> resultItemLore;
-    private Boolean protectionChanged;
+
     public RecipeGeneralDTO(String recipeKey, Material resultItemMaterial, String resultItemName, List<String> resultItemLore) {
         this.recipeKey = recipeKey;
         this.resultItemMaterial = resultItemMaterial;

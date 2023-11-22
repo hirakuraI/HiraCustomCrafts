@@ -2,7 +2,8 @@ package com.hirakurai.hiracustomcrafts.util.recipesConfigurators.toolRecipesConf
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.hirakurai.hiracustomcrafts.models.recipeDTO.tool.ToolShapedRecipeExtendedDTO;
+import com.hirakurai.hiracustomcrafts.models.ShapelessCraftIngredient;
+import com.hirakurai.hiracustomcrafts.models.recipeDTO.tool.ToolShapelessRecipeExtendedDTO;
 import com.hirakurai.hiracustomcrafts.util.JsonConfigurator;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
@@ -13,12 +14,12 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
-public class ToolShapedRecipeConfigurator implements JsonConfigurator {
+public class ToolShapelessRecipeConfigurator implements JsonConfigurator {
     private Gson gson = new GsonBuilder().setPrettyPrinting().create();
-    private File file = new File("./plugins/HiraCustomCrafts/CraftRecipes/ShapedRecipes/ToolShapedRecipesData.json");
-    private List<ToolShapedRecipeExtendedDTO> toolShapedRecipeDataList;
+    private File file = new File("./plugins/HiraCustomCrafts/CraftRecipes/ShapelessRecipes/ToolShapelessRecipesData.json");
+    private List<ToolShapelessRecipeExtendedDTO> toolShapelessRecipeDataList;
 
-    public ToolShapedRecipeConfigurator() {
+    public ToolShapelessRecipeConfigurator() {
         reload();
         uploadFromJsonFile();
     }
@@ -29,21 +30,18 @@ public class ToolShapedRecipeConfigurator implements JsonConfigurator {
                 createDataFolder();
 
                 file.createNewFile();
-                List<ToolShapedRecipeExtendedDTO> toolShapedRecipeDataListExample = new ArrayList<>(
+                List<ToolShapelessRecipeExtendedDTO> toolShapelessRecipeDataListExample = new ArrayList<>(
                         Arrays.asList(
-                                new ToolShapedRecipeExtendedDTO("test_shaped_tool_key1",
-                                        "BBB",
-                                        " S ",
-                                        " S ",
-                                        new HashMap<Character, NamespacedKey>() {{
-                                            put('B', NamespacedKey.minecraft("bedrock"));
-                                            put('S', NamespacedKey.minecraft("stick"));
-                                        }},
+                                new ToolShapelessRecipeExtendedDTO("test_shapeless_tool_key1",
                                         Material.WOODEN_AXE,
-                                        "TestShapedToolName1",
+                                        "TestShapelessToolName1",
                                         Arrays.asList(
-                                                "TestToolLore1",
-                                                "TestToolLore2"
+                                                "TestItemLore1",
+                                                "TestItemLore1"
+                                        ),
+                                        Arrays.asList(
+                                                new ShapelessCraftIngredient(NamespacedKey.minecraft("bedrock"), 3),
+                                                new ShapelessCraftIngredient(NamespacedKey.minecraft("stick"), 3)
                                         ),
                                         "mainhand",
                                         1000,
@@ -52,7 +50,7 @@ public class ToolShapedRecipeConfigurator implements JsonConfigurator {
                         )
                 );
                 Writer writer = new FileWriter(file, false);
-                gson.toJson(toolShapedRecipeDataListExample, writer);
+                gson.toJson(toolShapelessRecipeDataListExample, writer);
                 writer.flush();
                 writer.close();
             } catch (Exception e) {
@@ -68,7 +66,7 @@ public class ToolShapedRecipeConfigurator implements JsonConfigurator {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-        toolShapedRecipeDataList = new ArrayList<>(Arrays.asList(gson.fromJson(reader, ToolShapedRecipeExtendedDTO[].class)));
+        toolShapelessRecipeDataList = new ArrayList<>(Arrays.asList(gson.fromJson(reader, ToolShapelessRecipeExtendedDTO[].class)));
     }
 
     private void createDataFolder() {
@@ -77,7 +75,7 @@ public class ToolShapedRecipeConfigurator implements JsonConfigurator {
         }
     }
 
-    public List<ToolShapedRecipeExtendedDTO> getToolShapedRecipeDataList() {
-        return toolShapedRecipeDataList;
+    public List<ToolShapelessRecipeExtendedDTO> getToolShapelessRecipeDataList() {
+        return toolShapelessRecipeDataList;
     }
 }

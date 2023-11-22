@@ -1,15 +1,16 @@
 package com.hirakurai.hiracustomcrafts.registration;
 
 import com.hirakurai.hiracustomcrafts.HiraCustomCrafts;
+import com.hirakurai.hiracustomcrafts.models.ShapelessCraftIngredient;
 import com.hirakurai.hiracustomcrafts.models.recipeDTO.RecipeGeneralDTO;
-import com.hirakurai.hiracustomcrafts.models.recipeDTO.ShapedRecipeDTO;
-import com.hirakurai.hiracustomcrafts.models.recipeDTO.armor.ArmorShapedRecipeExtendedDTO;
-import com.hirakurai.hiracustomcrafts.models.recipeDTO.tool.ToolShapedRecipeExtendedDTO;
-import com.hirakurai.hiracustomcrafts.models.recipeDTO.weapon.WeaponShapedRecipeExtendedDTO;
-import com.hirakurai.hiracustomcrafts.util.recipesConfigurators.ShapedRecipeConfigurator;
-import com.hirakurai.hiracustomcrafts.util.recipesConfigurators.armorRecipesConfigurators.ArmorShapedRecipeConfigurator;
-import com.hirakurai.hiracustomcrafts.util.recipesConfigurators.toolRecipesConfigurators.ToolShapedRecipeConfigurator;
-import com.hirakurai.hiracustomcrafts.util.recipesConfigurators.weaponRecipesConfigurators.WeaponShapedRecipeConfigurator;
+import com.hirakurai.hiracustomcrafts.models.recipeDTO.ShapelessRecipeDTO;
+import com.hirakurai.hiracustomcrafts.models.recipeDTO.armor.ArmorShapelessRecipeExtendedDTO;
+import com.hirakurai.hiracustomcrafts.models.recipeDTO.tool.ToolShapelessRecipeExtendedDTO;
+import com.hirakurai.hiracustomcrafts.models.recipeDTO.weapon.WeaponShapelessRecipeExtendedDTO;
+import com.hirakurai.hiracustomcrafts.util.recipesConfigurators.ShapelessRecipeConfigurator;
+import com.hirakurai.hiracustomcrafts.util.recipesConfigurators.armorRecipesConfigurators.ArmorShapelessRecipeConfigurator;
+import com.hirakurai.hiracustomcrafts.util.recipesConfigurators.toolRecipesConfigurators.ToolShapelessRecipeConfigurator;
+import com.hirakurai.hiracustomcrafts.util.recipesConfigurators.weaponRecipesConfigurators.WeaponShapelessRecipeConfigurator;
 import com.hirakurai.hiracustomcrafts.util.tools.NBTHelper;
 import com.hirakurai.hiracustomcrafts.util.tools.StringHelper;
 import net.minecraft.nbt.CompoundTag;
@@ -19,85 +20,74 @@ import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.craftbukkit.v1_20_R1.inventory.CraftItemStack;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.ShapedRecipe;
+import org.bukkit.inventory.ShapelessRecipe;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.*;
 
-public class ShapedRecipeRegistrationManager {
-    private List<ShapedRecipeDTO> shapedRecipeDataList;
-    private List<ArmorShapedRecipeExtendedDTO> armorShapedRecipeDataList;
-    private List<ToolShapedRecipeExtendedDTO> toolShapedRecipeDataList;
-    private List<WeaponShapedRecipeExtendedDTO> weaponShapedRecipeDataList;
+public class ShapelessRecipeRegistrationManager {
 
-    public ShapedRecipeRegistrationManager() {
-        this.shapedRecipeDataList = new ShapedRecipeConfigurator().getItemShapedRecipeDataList();
-        this.armorShapedRecipeDataList = new ArmorShapedRecipeConfigurator().getArmorShapedRecipeDataList();
-        this.toolShapedRecipeDataList = new ToolShapedRecipeConfigurator().getToolShapedRecipeDataList();
-        this.weaponShapedRecipeDataList = new WeaponShapedRecipeConfigurator().getWeaponShapedRecipeDataList();
+    private List<ShapelessRecipeDTO> shapelessRecipeDataList;
+    private List<ArmorShapelessRecipeExtendedDTO> armorShapelessRecipeDataList;
+    private List<ToolShapelessRecipeExtendedDTO> toolShapelessRecipeDataList;
+    private List<WeaponShapelessRecipeExtendedDTO> weaponShapelessRecipeDataList;
+
+    public ShapelessRecipeRegistrationManager() {
+        this.shapelessRecipeDataList = new ShapelessRecipeConfigurator().getItemShapelessRecipeDataList();
+        this.armorShapelessRecipeDataList = new ArmorShapelessRecipeConfigurator().getArmorShapelessRecipeDataList();
+        this.toolShapelessRecipeDataList = new ToolShapelessRecipeConfigurator().getToolShapelessRecipeDataList();
+        this.weaponShapelessRecipeDataList = new WeaponShapelessRecipeConfigurator().getWeaponShapelessRecipeDataList();
     }
 
-    public void registerShapedRecipes() {
-        Integer countOfRecipes = shapedRecipeDataList.size() + armorShapedRecipeDataList.size() + toolShapedRecipeDataList.size() + weaponShapedRecipeDataList.size();
-        for (ShapedRecipeDTO shapedRecipeData : shapedRecipeDataList) {
-            registerItemShapedRecipe(shapedRecipeData);
+    public void registerShapelessRecipes() {
+        Integer countOfRecipes = shapelessRecipeDataList.size() + armorShapelessRecipeDataList.size() + toolShapelessRecipeDataList.size() + weaponShapelessRecipeDataList.size();
+        for (ShapelessRecipeDTO shapelessRecipeDTO : shapelessRecipeDataList) {
+            registerItemShapelessRecipe(shapelessRecipeDTO);
         }
-        for (ArmorShapedRecipeExtendedDTO armorShapedRecipeExtendedDTO : armorShapedRecipeDataList) {
-            registerArmorShapedRecipe(armorShapedRecipeExtendedDTO);
+        for (ArmorShapelessRecipeExtendedDTO armorShapelessRecipeExtendedDTO : armorShapelessRecipeDataList) {
+            registerArmorShapelessRecipe(armorShapelessRecipeExtendedDTO);
         }
-        for (ToolShapedRecipeExtendedDTO toolShapedRecipeExtendedDTO : toolShapedRecipeDataList) {
-            registerToolShapedRecipe(toolShapedRecipeExtendedDTO);
+        for (ToolShapelessRecipeExtendedDTO toolShapelessRecipeExtendedDTO : toolShapelessRecipeDataList) {
+            registerToolShapelessRecipe(toolShapelessRecipeExtendedDTO);
         }
-        for (WeaponShapedRecipeExtendedDTO weaponShapedRecipeExtendedDTO : weaponShapedRecipeDataList) {
-            registerWeaponShapedRecipe(weaponShapedRecipeExtendedDTO);
+        for (WeaponShapelessRecipeExtendedDTO weaponShapelessRecipeExtendedDTO : weaponShapelessRecipeDataList) {
+            registerWeaponShapelessRecipe(weaponShapelessRecipeExtendedDTO);
         }
-        HiraCustomCrafts.getPlugin().getLogger().info(countOfRecipes + " shaped recipes found.");
+        HiraCustomCrafts.getPlugin().getLogger().info(countOfRecipes + " shapeless recipes found.");
     }
 
-    private void registerItemShapedRecipe(ShapedRecipeDTO itemRecipeData) {
+    private void registerItemShapelessRecipe(ShapelessRecipeDTO itemRecipeData) {
         ItemStack resultItem = prepareResultItem(itemRecipeData);
-        ShapedRecipe recipe = prepareShapedRecipe(itemRecipeData, resultItem);
+        ShapelessRecipe recipe = prepareShapelessRecipe(itemRecipeData, resultItem);
         Bukkit.getServer().addRecipe(recipe);
     }
 
-    private void registerArmorShapedRecipe(ArmorShapedRecipeExtendedDTO armorRecipeData) {
+    private void registerArmorShapelessRecipe(ArmorShapelessRecipeExtendedDTO armorRecipeData) {
         ItemStack resultItem = prepareResultArmor(armorRecipeData);
-        ShapedRecipe recipe = prepareShapedRecipe(armorRecipeData, resultItem);
+        ShapelessRecipe recipe = prepareShapelessRecipe(armorRecipeData, resultItem);
         Bukkit.getServer().addRecipe(recipe);
     }
 
-    private void registerToolShapedRecipe(ToolShapedRecipeExtendedDTO toolRecipeData) {
+    private void registerToolShapelessRecipe(ToolShapelessRecipeExtendedDTO toolRecipeData) {
         ItemStack resultItem = prepareResultTool(toolRecipeData);
-        ShapedRecipe recipe = prepareShapedRecipe(toolRecipeData, resultItem);
+        ShapelessRecipe recipe = prepareShapelessRecipe(toolRecipeData, resultItem);
         Bukkit.getServer().addRecipe(recipe);
     }
 
-    private void registerWeaponShapedRecipe(WeaponShapedRecipeExtendedDTO weaponRecipeData) {
+    private void registerWeaponShapelessRecipe(WeaponShapelessRecipeExtendedDTO weaponRecipeData) {
         ItemStack resultItem = prepareResultWeapon(weaponRecipeData);
-        ShapedRecipe recipe = prepareShapedRecipe(weaponRecipeData, resultItem);
+        ShapelessRecipe recipe = prepareShapelessRecipe(weaponRecipeData, resultItem);
         Bukkit.getServer().addRecipe(recipe);
     }
 
-    private ShapedRecipe prepareShapedRecipe(ShapedRecipeDTO itemRecipeData, ItemStack resultItem) {
-        ShapedRecipe recipe = new ShapedRecipe(new NamespacedKey(HiraCustomCrafts.getPlugin(), itemRecipeData.getRecipeKey()), resultItem);
-        if (itemRecipeData.getItemCraftRecipeBottomLine().equals("   ")) {
-            recipe.shape(
-                    itemRecipeData.getItemCraftRecipeUpperLine(),
-                    itemRecipeData.getItemCraftRecipeMiddleLine());
-        } else {
-            recipe.shape(
-                    itemRecipeData.getItemCraftRecipeUpperLine(),
-                    itemRecipeData.getItemCraftRecipeMiddleLine(),
-                    itemRecipeData.getItemCraftRecipeBottomLine());
-        }
-        HashMap<Character, NamespacedKey> craftIngredients = itemRecipeData.getCraftIngredients();
-        Set<Character> ingredientsKeys = craftIngredients.keySet();
-        for (Character ingredientKey : ingredientsKeys) {
-            NamespacedKey itemNamespacedKey = craftIngredients.get(ingredientKey);
-            if (itemNamespacedKey.getNamespace().equals("minecraft")) {
-                recipe.setIngredient(ingredientKey, Material.valueOf(itemNamespacedKey.getKey().toUpperCase()));
+    private ShapelessRecipe prepareShapelessRecipe(ShapelessRecipeDTO itemRecipeData, ItemStack resultItem) {
+        ShapelessRecipe recipe = new ShapelessRecipe(new NamespacedKey(HiraCustomCrafts.getPlugin(), itemRecipeData.getRecipeKey()), resultItem);
+        List<ShapelessCraftIngredient> craftIngredients = itemRecipeData.getCraftIngredients();
+        for (ShapelessCraftIngredient craftIngredient : craftIngredients) {
+            if (craftIngredient.getNamespacedKey().getNamespace().equals("minecraft")) {
+                recipe.addIngredient(craftIngredient.getCount(), Material.valueOf(craftIngredient.getNamespacedKey().getKey().toUpperCase()));
             } else {
-                recipe.setIngredient(ingredientKey, Bukkit.getRecipe(craftIngredients.get(ingredientKey)).getResult().getData());
+                recipe.addIngredient(craftIngredient.getCount(), Bukkit.getRecipe(craftIngredient.getNamespacedKey()).getResult().getData());
             }
         }
         return recipe;
@@ -110,7 +100,7 @@ public class ShapedRecipeRegistrationManager {
                 itemRecipeData.getResultItemLore());
     }
 
-    private ItemStack prepareResultArmor(ArmorShapedRecipeExtendedDTO armorRecipeData) {
+    private ItemStack prepareResultArmor(ArmorShapelessRecipeExtendedDTO armorRecipeData) {
         ItemStack resultItem = new ItemStack(armorRecipeData.getResultItemMaterial());
         prepareItemMeta(resultItem,
                 armorRecipeData.getResultItemName(),
@@ -152,7 +142,7 @@ public class ShapedRecipeRegistrationManager {
         return CraftItemStack.asBukkitCopy(NMSResultItemCopy);
     }
 
-    private ItemStack prepareResultTool(ToolShapedRecipeExtendedDTO toolRecipeData) {
+    private ItemStack prepareResultTool(ToolShapelessRecipeExtendedDTO toolRecipeData) {
         ItemStack resultItem = new ItemStack(toolRecipeData.getResultItemMaterial());
         prepareItemMeta(resultItem,
                 toolRecipeData.getResultItemName(),
@@ -186,7 +176,7 @@ public class ShapedRecipeRegistrationManager {
         return CraftItemStack.asBukkitCopy(NMSResultItemCopy);
     }
 
-    private ItemStack prepareResultWeapon(WeaponShapedRecipeExtendedDTO weaponRecipeData) {
+    private ItemStack prepareResultWeapon(WeaponShapelessRecipeExtendedDTO weaponRecipeData) {
         ItemStack resultItem = new ItemStack(weaponRecipeData.getResultItemMaterial());
         prepareItemMeta(resultItem,
                 weaponRecipeData.getResultItemName(),

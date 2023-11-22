@@ -32,7 +32,7 @@ public class ShapedRecipeConfigurator implements JsonConfigurator {
                 file.createNewFile();
                 List<ShapedRecipeDTO> itemShapedRecipeDataListExample = new ArrayList<>(
                         Arrays.asList(
-                                new ShapedRecipeDTO("test_item_key1",
+                                new ShapedRecipeDTO("test_shaped_item_key1",
                                         "L L",
                                         "BBB",
                                         "BBB",
@@ -41,23 +41,23 @@ public class ShapedRecipeConfigurator implements JsonConfigurator {
                                             put('L', NamespacedKey.minecraft("leather"));
                                         }},
                                         Material.BEDROCK,
-                                        "TestItemName1",
+                                        "TestShapedItemName1",
                                         Arrays.asList(
                                                 "TestItemLore1",
                                                 "TestItemLore2"
                                         )
                                 ),
-                                new ShapedRecipeDTO("test_item_key2",
+                                new ShapedRecipeDTO("test_shaped_item_key2",
                                         "LLL",
                                         "BLB",
                                         "BCB",
                                         new HashMap<Character, NamespacedKey>() {{
                                             put('B', NamespacedKey.minecraft("bedrock"));
                                             put('L', NamespacedKey.minecraft("leather"));
-                                            put('C', NamespacedKey.fromString("test_item_key1", HiraCustomCrafts.getPlugin()));
+                                            put('C', NamespacedKey.fromString("test_shaped_item_key1", HiraCustomCrafts.getPlugin()));
                                         }},
                                         Material.BEDROCK,
-                                        "TestItemName2",
+                                        "TestShapedItemName2",
                                         Arrays.asList(
                                                 "TestItemLore3",
                                                 "TestItemLore4"

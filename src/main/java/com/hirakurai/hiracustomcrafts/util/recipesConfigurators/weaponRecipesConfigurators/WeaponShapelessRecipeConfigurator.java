@@ -2,7 +2,8 @@ package com.hirakurai.hiracustomcrafts.util.recipesConfigurators.weaponRecipesCo
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.hirakurai.hiracustomcrafts.models.recipeDTO.weapon.WeaponShapedRecipeExtendedDTO;
+import com.hirakurai.hiracustomcrafts.models.ShapelessCraftIngredient;
+import com.hirakurai.hiracustomcrafts.models.recipeDTO.weapon.WeaponShapelessRecipeExtendedDTO;
 import com.hirakurai.hiracustomcrafts.util.JsonConfigurator;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
@@ -13,12 +14,12 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
-public class WeaponShapedRecipeConfigurator implements JsonConfigurator {
+public class WeaponShapelessRecipeConfigurator implements JsonConfigurator {
     private Gson gson = new GsonBuilder().setPrettyPrinting().create();
-    private File file = new File("./plugins/HiraCustomCrafts/CraftRecipes/ShapedRecipes/WeaponShapedRecipesData.json");
-    private List<WeaponShapedRecipeExtendedDTO> weaponShapedRecipeDataList;
+    private File file = new File("./plugins/HiraCustomCrafts/CraftRecipes/ShapelessRecipes/WeaponShapelessRecipesData.json");
+    private List<WeaponShapelessRecipeExtendedDTO> weaponShapelessRecipeDataList;
 
-    public WeaponShapedRecipeConfigurator() {
+    public WeaponShapelessRecipeConfigurator() {
         reload();
         uploadFromJsonFile();
     }
@@ -29,21 +30,18 @@ public class WeaponShapedRecipeConfigurator implements JsonConfigurator {
                 createDataFolder();
 
                 file.createNewFile();
-                List<WeaponShapedRecipeExtendedDTO> weaponShapedRecipeDataListExample = new ArrayList<>(
+                List<WeaponShapelessRecipeExtendedDTO> weaponShapelessRecipeDataListExample = new ArrayList<>(
                         Arrays.asList(
-                                new WeaponShapedRecipeExtendedDTO("test_shaped_weapon_key1",
-                                        " B ",
-                                        " B ",
-                                        " S ",
-                                        new HashMap<Character, NamespacedKey>() {{
-                                            put('B', NamespacedKey.minecraft("bedrock"));
-                                            put('S', NamespacedKey.minecraft("stick"));
-                                        }},
+                                new WeaponShapelessRecipeExtendedDTO("test_shapeless_weapon_key1",
                                         Material.WOODEN_SWORD,
-                                        "TestShapedWeaponName1",
+                                        "TestShapelessWeaponName1",
                                         Arrays.asList(
-                                                "TestWeaponLore1",
-                                                "TestWeaponLore2"
+                                                "TestItemLore1",
+                                                "TestItemLore1"
+                                        ),
+                                        Arrays.asList(
+                                                new ShapelessCraftIngredient(NamespacedKey.minecraft("bedrock"), 2),
+                                                new ShapelessCraftIngredient(NamespacedKey.minecraft("stick"), 3)
                                         ),
                                         "mainhand",
                                         1000,
@@ -52,7 +50,7 @@ public class WeaponShapedRecipeConfigurator implements JsonConfigurator {
                         )
                 );
                 Writer writer = new FileWriter(file, false);
-                gson.toJson(weaponShapedRecipeDataListExample, writer);
+                gson.toJson(weaponShapelessRecipeDataListExample, writer);
                 writer.flush();
                 writer.close();
             } catch (Exception e) {
@@ -68,7 +66,7 @@ public class WeaponShapedRecipeConfigurator implements JsonConfigurator {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-        weaponShapedRecipeDataList = new ArrayList<>(Arrays.asList(gson.fromJson(reader, WeaponShapedRecipeExtendedDTO[].class)));
+        weaponShapelessRecipeDataList = new ArrayList<>(Arrays.asList(gson.fromJson(reader, WeaponShapelessRecipeExtendedDTO[].class)));
     }
 
     private void createDataFolder() {
@@ -77,7 +75,7 @@ public class WeaponShapedRecipeConfigurator implements JsonConfigurator {
         }
     }
 
-    public List<WeaponShapedRecipeExtendedDTO> getWeaponShapedRecipeDataList() {
-        return weaponShapedRecipeDataList;
+    public List<WeaponShapelessRecipeExtendedDTO> getWeaponShapelessRecipeDataList() {
+        return weaponShapelessRecipeDataList;
     }
 }
