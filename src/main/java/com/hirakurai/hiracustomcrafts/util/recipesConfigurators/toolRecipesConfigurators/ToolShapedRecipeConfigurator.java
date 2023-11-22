@@ -45,6 +45,7 @@ public class ToolShapedRecipeConfigurator implements JsonConfigurator {
                                                 "TestToolLore1",
                                                 "TestToolLore2"
                                         ),
+                                        "mainhand",
                                         1000,
                                         1000
                                 )
@@ -67,7 +68,7 @@ public class ToolShapedRecipeConfigurator implements JsonConfigurator {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-        toolShapedRecipeDataList = new ArrayList<>(Arrays.asList(gson.fromJson(reader, ToolShapedRecipeExtendedDTO.class)));
+        toolShapedRecipeDataList = new ArrayList<>(Arrays.asList(gson.fromJson(reader, ToolShapedRecipeExtendedDTO[].class)));
     }
 
     private void createDataFolder() {

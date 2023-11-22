@@ -45,6 +45,7 @@ public class ArmorShapedRecipeConfigurator implements JsonConfigurator {
                                                 "TestArmorLore1",
                                                 "TestArmorLore2"
                                         ),
+                                        "chest",
                                         10,
                                         300,
                                         0.01F
@@ -68,7 +69,7 @@ public class ArmorShapedRecipeConfigurator implements JsonConfigurator {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-        armorShapedRecipeDataList = new ArrayList<>(Arrays.asList(gson.fromJson(reader, ArmorShapedRecipeExtendedDTO.class)));
+        armorShapedRecipeDataList = new ArrayList<>(Arrays.asList(gson.fromJson(reader, ArmorShapedRecipeExtendedDTO[].class)));
     }
 
     private void createDataFolder() {

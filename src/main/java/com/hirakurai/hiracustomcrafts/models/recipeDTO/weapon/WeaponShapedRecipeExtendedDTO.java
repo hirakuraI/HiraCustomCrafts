@@ -8,6 +8,7 @@ import java.util.HashMap;
 import java.util.List;
 
 public class WeaponShapedRecipeExtendedDTO extends ShapedRecipeDTO {
+    private String slot;
     private Integer attackDamageToAdd;
     private Integer attackSpeedToAdd;
 
@@ -19,6 +20,7 @@ public class WeaponShapedRecipeExtendedDTO extends ShapedRecipeDTO {
                                          Material resultItemMaterial,
                                          String resultItemName,
                                          List<String> resultItemLore,
+                                         String slot,
                                          Integer attackDamageToAdd,
                                          Integer attackSpeedToAdd) {
         super(recipeKey,
@@ -29,8 +31,17 @@ public class WeaponShapedRecipeExtendedDTO extends ShapedRecipeDTO {
                 resultItemMaterial,
                 resultItemName,
                 resultItemLore);
+        this.slot = slot;
         this.attackDamageToAdd = attackDamageToAdd;
         this.attackSpeedToAdd = attackSpeedToAdd;
+    }
+
+    public String getSlot() {
+        return slot;
+    }
+
+    public void setSlot(String slot) {
+        this.slot = slot;
     }
 
     public Integer getAttackDamageToAdd() {

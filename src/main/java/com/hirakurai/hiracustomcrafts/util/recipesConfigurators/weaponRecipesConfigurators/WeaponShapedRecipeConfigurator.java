@@ -45,6 +45,7 @@ public class WeaponShapedRecipeConfigurator implements JsonConfigurator {
                                                 "TestWeaponLore1",
                                                 "TestWeaponLore2"
                                         ),
+                                        "mainhand",
                                         1000,
                                         1000
                                 )
@@ -67,7 +68,7 @@ public class WeaponShapedRecipeConfigurator implements JsonConfigurator {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-        weaponShapedRecipeDataList = new ArrayList<>(Arrays.asList(gson.fromJson(reader, WeaponShapedRecipeExtendedDTO.class)));
+        weaponShapedRecipeDataList = new ArrayList<>(Arrays.asList(gson.fromJson(reader, WeaponShapedRecipeExtendedDTO[].class)));
     }
 
     private void createDataFolder() {
