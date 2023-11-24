@@ -1,5 +1,7 @@
 package com.hirakurai.hiracustomcrafts;
 
+import com.hirakurai.hiracustomcrafts.registration.BlastFurnaceRecipeRegistrationManager;
+import com.hirakurai.hiracustomcrafts.registration.FurnaceRecipeRegistrationManager;
 import com.hirakurai.hiracustomcrafts.registration.ShapedRecipeRegistrationManager;
 import com.hirakurai.hiracustomcrafts.registration.ShapelessRecipeRegistrationManager;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -14,6 +16,10 @@ public final class HiraCustomCrafts extends JavaPlugin {
         shapedRecipeRegistrationManager.registerShapedRecipes();
         ShapelessRecipeRegistrationManager shapelessRecipeRegistrationManager = new ShapelessRecipeRegistrationManager();
         shapelessRecipeRegistrationManager.registerShapelessRecipes();
+        FurnaceRecipeRegistrationManager furnaceRecipeRegistrationManager = new FurnaceRecipeRegistrationManager();
+        furnaceRecipeRegistrationManager.registerFurnaceRecipes();
+        BlastFurnaceRecipeRegistrationManager blastFurnaceRecipeRegistrationManager = new BlastFurnaceRecipeRegistrationManager();
+        blastFurnaceRecipeRegistrationManager.registerBlastFurnaceRecipes();
         this.getLogger().info("HiraCustomCrafts successfully enabled!");
     }
 

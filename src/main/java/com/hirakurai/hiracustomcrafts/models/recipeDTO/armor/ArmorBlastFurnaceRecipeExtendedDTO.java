@@ -1,29 +1,31 @@
 package com.hirakurai.hiracustomcrafts.models.recipeDTO.armor;
 
-import com.hirakurai.hiracustomcrafts.models.ShapelessCraftIngredient;
-import com.hirakurai.hiracustomcrafts.models.recipeDTO.ShapelessRecipeDTO;
+import com.hirakurai.hiracustomcrafts.models.recipeDTO.BlastFurnaceRecipeDTO;
 import org.bukkit.Material;
+import org.bukkit.NamespacedKey;
 
 import java.util.List;
 
-public class ArmorShapelessRecipeExtendedDTO extends ShapelessRecipeDTO {
+public class ArmorBlastFurnaceRecipeExtendedDTO extends BlastFurnaceRecipeDTO {
     private String slot;
     private Integer protectionToAdd;
     private Short durability;
     private Integer toughnessToAdd;
     private Float knockbackResistanceToAdd;
 
-    public ArmorShapelessRecipeExtendedDTO(String recipeKey,
-                                           Material resultItemMaterial,
-                                           String resultItemName,
-                                           List<String> resultItemLore,
-                                           List<ShapelessCraftIngredient> craftIngredients,
-                                           String slot,
-                                           Integer protectionToAdd,
-                                           Short durability,
-                                           Integer toughnessToAdd,
-                                           Float knockbackResistanceToAdd) {
-        super(recipeKey, resultItemMaterial, resultItemName, resultItemLore, craftIngredients);
+    public ArmorBlastFurnaceRecipeExtendedDTO(String recipeKey,
+                                              Material resultItemMaterial,
+                                              String resultItemName,
+                                              List<String> resultItemLore,
+                                              NamespacedKey craftIngredient,
+                                              Integer experience,
+                                              Integer cookingTime,
+                                              String slot,
+                                              Integer protectionToAdd,
+                                              Short durability,
+                                              Integer toughnessToAdd,
+                                              Float knockbackResistanceToAdd) {
+        super(recipeKey, resultItemMaterial, resultItemName, resultItemLore, craftIngredient, experience, cookingTime);
         this.slot = slot;
         this.protectionToAdd = protectionToAdd;
         this.durability = durability;
@@ -54,7 +56,6 @@ public class ArmorShapelessRecipeExtendedDTO extends ShapelessRecipeDTO {
     public void setDurability(Short durability) {
         this.durability = durability;
     }
-
     public Integer getToughnessToAdd() {
         return toughnessToAdd;
     }

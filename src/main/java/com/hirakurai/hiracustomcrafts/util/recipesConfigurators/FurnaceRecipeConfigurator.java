@@ -2,8 +2,7 @@ package com.hirakurai.hiracustomcrafts.util.recipesConfigurators;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.hirakurai.hiracustomcrafts.models.ShapelessCraftIngredient;
-import com.hirakurai.hiracustomcrafts.models.recipeDTO.ShapelessRecipeDTO;
+import com.hirakurai.hiracustomcrafts.models.recipeDTO.FurnaceRecipeDTO;
 import com.hirakurai.hiracustomcrafts.util.JsonConfigurator;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
@@ -13,13 +12,12 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class ShapelessRecipeConfigurator implements JsonConfigurator {
-
+public class FurnaceRecipeConfigurator implements JsonConfigurator {
     private Gson gson = new GsonBuilder().setPrettyPrinting().create();
-    private File file = new File("./plugins/HiraCustomCrafts/CraftRecipes/ShapelessRecipes/ShapelessRecipesData.json");
-    private List<ShapelessRecipeDTO> itemShapelessRecipeDataList;
+    private File file = new File("./plugins/HiraCustomCrafts/CraftRecipes/FurnaceRecipes/FurnaceRecipesData.json");
+    private List<FurnaceRecipeDTO> itemFurnaceRecipeDataList;
 
-    public ShapelessRecipeConfigurator() {
+    public FurnaceRecipeConfigurator() {
         reload();
         uploadFromJsonFile();
     }
@@ -30,24 +28,23 @@ public class ShapelessRecipeConfigurator implements JsonConfigurator {
                 createDataFolder();
 
                 file.createNewFile();
-                List<ShapelessRecipeDTO> itemShapelessRecipeDataListExample = new ArrayList<>(
+                List<FurnaceRecipeDTO> itemFurnaceRecipeDataListExample = new ArrayList<>(
                         Arrays.asList(
-                                new ShapelessRecipeDTO("test_shapeless_item_key1",
+                                new FurnaceRecipeDTO("test_furnace_item_key1",
                                         Material.BEDROCK,
-                                        "TestShapelessItemName1",
+                                        "TestFurnaceItemName1",
                                         Arrays.asList(
                                                 "TestItemLore1",
                                                 "TestItemLore2"
                                         ),
-                                        Arrays.asList(
-                                                new ShapelessCraftIngredient(NamespacedKey.minecraft("bedrock"), 6),
-                                                new ShapelessCraftIngredient(NamespacedKey.minecraft("stick"), 3)
-                                        )
+                                        NamespacedKey.minecraft("bedrock"),
+                                        10,
+                                        20
                                 )
                         )
                 );
                 Writer writer = new FileWriter(file, false);
-                gson.toJson(itemShapelessRecipeDataListExample, writer);
+                gson.toJson(itemFurnaceRecipeDataListExample, writer);
                 writer.flush();
                 writer.close();
             } catch (Exception e) {
@@ -63,7 +60,7 @@ public class ShapelessRecipeConfigurator implements JsonConfigurator {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-        itemShapelessRecipeDataList = new ArrayList<>(Arrays.asList(gson.fromJson(reader, ShapelessRecipeDTO[].class)));
+        itemFurnaceRecipeDataList = new ArrayList<>(Arrays.asList(gson.fromJson(reader, FurnaceRecipeDTO[].class)));
     }
 
     private void createDataFolder() {
@@ -72,7 +69,7 @@ public class ShapelessRecipeConfigurator implements JsonConfigurator {
         }
     }
 
-    public List<ShapelessRecipeDTO> getItemShapelessRecipeDataList() {
-        return itemShapelessRecipeDataList;
+    public List<FurnaceRecipeDTO> getItemFurnaceRecipeDataList() {
+        return itemFurnaceRecipeDataList;
     }
 }

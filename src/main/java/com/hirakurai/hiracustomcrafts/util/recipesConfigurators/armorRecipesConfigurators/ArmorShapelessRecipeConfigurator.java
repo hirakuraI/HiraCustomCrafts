@@ -11,7 +11,6 @@ import org.bukkit.NamespacedKey;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
 
 public class ArmorShapelessRecipeConfigurator implements JsonConfigurator {
@@ -45,7 +44,8 @@ public class ArmorShapelessRecipeConfigurator implements JsonConfigurator {
                                         ),
                                         "chest",
                                         10,
-                                        300,
+                                        (short) 300,
+                                        3,
                                         0.01F
 
                                 )

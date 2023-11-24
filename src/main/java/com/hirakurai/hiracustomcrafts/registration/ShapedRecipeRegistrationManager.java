@@ -112,6 +112,7 @@ public class ShapedRecipeRegistrationManager {
 
     private ItemStack prepareResultArmor(ArmorShapedRecipeExtendedDTO armorRecipeData) {
         ItemStack resultItem = new ItemStack(armorRecipeData.getResultItemMaterial());
+        resultItem.setDurability((short) -armorRecipeData.getDurability());
         prepareItemMeta(resultItem,
                 armorRecipeData.getResultItemName(),
                 armorRecipeData.getResultItemLore());
@@ -129,12 +130,12 @@ public class ShapedRecipeRegistrationManager {
                     armorRecipeData.getProtectionToAdd().doubleValue(),
                     random));
         }
-        if (armorRecipeData.getDurabilityToAdd() != 0) {
+        if (armorRecipeData.getToughnessToAdd() != 0) {
             attributeModifiers.add(NBTHelper.createAttributeModifier("generic.armor_toughness",
                     "generic.armor_toughness",
                     armorRecipeData.getSlot(),
                     0,
-                    armorRecipeData.getDurabilityToAdd().doubleValue(),
+                    armorRecipeData.getToughnessToAdd().doubleValue(),
                     random));
         }
         if (armorRecipeData.getKnockbackResistanceToAdd() != 0) {

@@ -2,7 +2,7 @@ package com.hirakurai.hiracustomcrafts.util.recipesConfigurators.armorRecipesCon
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.hirakurai.hiracustomcrafts.models.recipeDTO.armor.ArmorShapedRecipeExtendedDTO;
+import com.hirakurai.hiracustomcrafts.models.recipeDTO.armor.ArmorBlastFurnaceRecipeExtendedDTO;
 import com.hirakurai.hiracustomcrafts.util.JsonConfigurator;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
@@ -10,15 +10,14 @@ import org.bukkit.NamespacedKey;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
 
-public class ArmorShapedRecipeConfigurator implements JsonConfigurator {
+public class ArmorBlastFurnaceRecipeConfigurator implements JsonConfigurator {
     private Gson gson = new GsonBuilder().setPrettyPrinting().create();
-    private File file = new File("./plugins/HiraCustomCrafts/CraftRecipes/ShapedRecipes/ArmorShapedRecipesData.json");
-    private List<ArmorShapedRecipeExtendedDTO> armorShapedRecipeDataList;
+    private File file = new File("./plugins/HiraCustomCrafts/CraftRecipes/BlastFurnaceRecipes/ArmorBlastFurnaceRecipesData.json");
+    private List<ArmorBlastFurnaceRecipeExtendedDTO> armorBlastFurnaceRecipeDataList;
 
-    public ArmorShapedRecipeConfigurator() {
+    public ArmorBlastFurnaceRecipeConfigurator() {
         reload();
         uploadFromJsonFile();
     }
@@ -29,22 +28,18 @@ public class ArmorShapedRecipeConfigurator implements JsonConfigurator {
                 createDataFolder();
 
                 file.createNewFile();
-                List<ArmorShapedRecipeExtendedDTO> armorShapedRecipeDataListExample = new ArrayList<>(
+                List<ArmorBlastFurnaceRecipeExtendedDTO> armorBlastFurnaceRecipeDataListExample = new ArrayList<>(
                         Arrays.asList(
-                                new ArmorShapedRecipeExtendedDTO("test_shaped_armor_key1",
-                                        "B B",
-                                        "BCB",
-                                        "BBB",
-                                        new HashMap<Character, NamespacedKey>() {{
-                                            put('B', NamespacedKey.minecraft("bedrock"));
-                                            put('C', NamespacedKey.minecraft("cobblestone"));
-                                        }},
+                                new ArmorBlastFurnaceRecipeExtendedDTO("test_blast_furnace_armor_key1",
                                         Material.LEATHER_CHESTPLATE,
-                                        "TestShapedArmorName1",
+                                        "TestBlastFurnaceArmorName1",
                                         Arrays.asList(
-                                                "TestArmorLore1",
-                                                "TestArmorLore2"
+                                                "TestItemLore1",
+                                                "TestItemLore2"
                                         ),
+                                        NamespacedKey.minecraft("iron_chestplate"),
+                                        10,
+                                        20,
                                         "chest",
                                         10,
                                         (short) 300,
@@ -54,7 +49,7 @@ public class ArmorShapedRecipeConfigurator implements JsonConfigurator {
                         )
                 );
                 Writer writer = new FileWriter(file, false);
-                gson.toJson(armorShapedRecipeDataListExample, writer);
+                gson.toJson(armorBlastFurnaceRecipeDataListExample, writer);
                 writer.flush();
                 writer.close();
             } catch (Exception e) {
@@ -70,7 +65,7 @@ public class ArmorShapedRecipeConfigurator implements JsonConfigurator {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-        armorShapedRecipeDataList = new ArrayList<>(Arrays.asList(gson.fromJson(reader, ArmorShapedRecipeExtendedDTO[].class)));
+        armorBlastFurnaceRecipeDataList = new ArrayList<>(Arrays.asList(gson.fromJson(reader, ArmorBlastFurnaceRecipeExtendedDTO[].class)));
     }
 
     private void createDataFolder() {
@@ -79,7 +74,7 @@ public class ArmorShapedRecipeConfigurator implements JsonConfigurator {
         }
     }
 
-    public List<ArmorShapedRecipeExtendedDTO> getArmorShapedRecipeDataList() {
-        return armorShapedRecipeDataList;
+    public List<ArmorBlastFurnaceRecipeExtendedDTO> getArmorBlastFurnaceRecipeDataList() {
+        return armorBlastFurnaceRecipeDataList;
     }
 }

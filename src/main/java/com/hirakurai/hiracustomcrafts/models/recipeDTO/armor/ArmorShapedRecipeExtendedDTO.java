@@ -10,7 +10,8 @@ import java.util.List;
 public class ArmorShapedRecipeExtendedDTO extends ShapedRecipeDTO {
     private String slot;
     private Integer protectionToAdd;
-    private Integer durabilityToAdd;
+    private Short durability;
+    private Integer toughnessToAdd;
     private Float knockbackResistanceToAdd;
 
     public ArmorShapedRecipeExtendedDTO(String recipeKey,
@@ -23,19 +24,14 @@ public class ArmorShapedRecipeExtendedDTO extends ShapedRecipeDTO {
                                         List<String> resultItemLore,
                                         String slot,
                                         Integer protectionToAdd,
-                                        Integer durabilityToAdd,
+                                        Short durability,
+                                        Integer toughnessToAdd,
                                         Float knockbackResistanceToAdd) {
-        super(recipeKey,
-                craftRecipeUpperLine,
-                craftRecipeMiddleLine,
-                craftRecipeBottomLine,
-                craftIngredients,
-                resultItemMaterial,
-                resultItemName,
-                resultItemLore);
+        super(recipeKey, craftRecipeUpperLine, craftRecipeMiddleLine, craftRecipeBottomLine, craftIngredients, resultItemMaterial, resultItemName, resultItemLore);
         this.slot = slot;
         this.protectionToAdd = protectionToAdd;
-        this.durabilityToAdd = durabilityToAdd;
+        this.durability = durability;
+        this.toughnessToAdd = toughnessToAdd;
         this.knockbackResistanceToAdd = knockbackResistanceToAdd;
     }
 
@@ -55,12 +51,19 @@ public class ArmorShapedRecipeExtendedDTO extends ShapedRecipeDTO {
         this.protectionToAdd = protectionToAdd;
     }
 
-    public Integer getDurabilityToAdd() {
-        return durabilityToAdd;
+    public Short getDurability() {
+        return durability;
     }
 
-    public void setDurabilityToAdd(Integer durabilityToAdd) {
-        this.durabilityToAdd = durabilityToAdd;
+    public void setDurability(Short durability) {
+        this.durability = durability;
+    }
+    public Integer getToughnessToAdd() {
+        return toughnessToAdd;
+    }
+
+    public void setToughnessToAdd(Integer toughnessToAdd) {
+        this.toughnessToAdd = toughnessToAdd;
     }
 
     public Float getKnockbackResistanceToAdd() {
@@ -71,3 +74,4 @@ public class ArmorShapedRecipeExtendedDTO extends ShapedRecipeDTO {
         this.knockbackResistanceToAdd = knockbackResistanceToAdd;
     }
 }
+

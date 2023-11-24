@@ -3,9 +3,7 @@ package com.hirakurai.hiracustomcrafts.models.recipeDTO.weapon;
 import com.hirakurai.hiracustomcrafts.models.ShapelessCraftIngredient;
 import com.hirakurai.hiracustomcrafts.models.recipeDTO.ShapelessRecipeDTO;
 import org.bukkit.Material;
-import org.bukkit.NamespacedKey;
 
-import java.util.HashMap;
 import java.util.List;
 
 public class WeaponShapelessRecipeExtendedDTO extends ShapelessRecipeDTO {

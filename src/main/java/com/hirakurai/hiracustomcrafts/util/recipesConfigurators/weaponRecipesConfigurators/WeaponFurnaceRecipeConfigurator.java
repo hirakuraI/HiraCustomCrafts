@@ -2,8 +2,8 @@ package com.hirakurai.hiracustomcrafts.util.recipesConfigurators.weaponRecipesCo
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.hirakurai.hiracustomcrafts.models.ShapelessCraftIngredient;
-import com.hirakurai.hiracustomcrafts.models.recipeDTO.weapon.WeaponShapelessRecipeExtendedDTO;
+import com.hirakurai.hiracustomcrafts.models.recipeDTO.tool.ToolFurnaceRecipeExtendedDTO;
+import com.hirakurai.hiracustomcrafts.models.recipeDTO.weapon.WeaponFurnaceRecipeExtendedDTO;
 import com.hirakurai.hiracustomcrafts.util.JsonConfigurator;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
@@ -13,12 +13,12 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class WeaponShapelessRecipeConfigurator implements JsonConfigurator {
+public class WeaponFurnaceRecipeConfigurator implements JsonConfigurator {
     private Gson gson = new GsonBuilder().setPrettyPrinting().create();
-    private File file = new File("./plugins/HiraCustomCrafts/CraftRecipes/ShapelessRecipes/WeaponShapelessRecipesData.json");
-    private List<WeaponShapelessRecipeExtendedDTO> weaponShapelessRecipeDataList;
+    private File file = new File("./plugins/HiraCustomCrafts/CraftRecipes/FurnaceRecipes/WeaponFurnaceRecipesData.json");
+    private List<WeaponFurnaceRecipeExtendedDTO> weaponFurnaceRecipeDataList;
 
-    public WeaponShapelessRecipeConfigurator() {
+    public WeaponFurnaceRecipeConfigurator() {
         reload();
         uploadFromJsonFile();
     }
@@ -29,19 +29,18 @@ public class WeaponShapelessRecipeConfigurator implements JsonConfigurator {
                 createDataFolder();
 
                 file.createNewFile();
-                List<WeaponShapelessRecipeExtendedDTO> weaponShapelessRecipeDataListExample = new ArrayList<>(
+                List<WeaponFurnaceRecipeExtendedDTO> weaponFurnaceRecipeDataListExample = new ArrayList<>(
                         Arrays.asList(
-                                new WeaponShapelessRecipeExtendedDTO("test_shapeless_weapon_key1",
+                                new WeaponFurnaceRecipeExtendedDTO("test_furnace_weapon_key1",
                                         Material.WOODEN_SWORD,
-                                        "TestShapelessWeaponName1",
+                                        "TestFurnaceWeaponName1",
                                         Arrays.asList(
                                                 "TestItemLore1",
-                                                "TestItemLore1"
+                                                "TestItemLore2"
                                         ),
-                                        Arrays.asList(
-                                                new ShapelessCraftIngredient(NamespacedKey.minecraft("bedrock"), 2),
-                                                new ShapelessCraftIngredient(NamespacedKey.minecraft("stick"), 3)
-                                        ),
+                                        NamespacedKey.minecraft("iron_sword"),
+                                        10,
+                                        20,
                                         "mainhand",
                                         1000,
                                         1000
@@ -49,7 +48,7 @@ public class WeaponShapelessRecipeConfigurator implements JsonConfigurator {
                         )
                 );
                 Writer writer = new FileWriter(file, false);
-                gson.toJson(weaponShapelessRecipeDataListExample, writer);
+                gson.toJson(weaponFurnaceRecipeDataListExample, writer);
                 writer.flush();
                 writer.close();
             } catch (Exception e) {
@@ -65,7 +64,7 @@ public class WeaponShapelessRecipeConfigurator implements JsonConfigurator {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-        weaponShapelessRecipeDataList = new ArrayList<>(Arrays.asList(gson.fromJson(reader, WeaponShapelessRecipeExtendedDTO[].class)));
+        weaponFurnaceRecipeDataList = new ArrayList<>(Arrays.asList(gson.fromJson(reader, WeaponFurnaceRecipeExtendedDTO[].class)));
     }
 
     private void createDataFolder() {
@@ -74,7 +73,7 @@ public class WeaponShapelessRecipeConfigurator implements JsonConfigurator {
         }
     }
 
-    public List<WeaponShapelessRecipeExtendedDTO> getWeaponShapelessRecipeDataList() {
-        return weaponShapelessRecipeDataList;
+    public List<WeaponFurnaceRecipeExtendedDTO> getWeaponFurnaceRecipeDataList() {
+        return weaponFurnaceRecipeDataList;
     }
 }

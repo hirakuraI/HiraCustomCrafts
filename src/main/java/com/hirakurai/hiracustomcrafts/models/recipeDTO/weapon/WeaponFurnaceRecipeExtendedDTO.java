@@ -1,25 +1,27 @@
-package com.hirakurai.hiracustomcrafts.models.recipeDTO.tool;
+package com.hirakurai.hiracustomcrafts.models.recipeDTO.weapon;
 
-import com.hirakurai.hiracustomcrafts.models.ShapelessCraftIngredient;
-import com.hirakurai.hiracustomcrafts.models.recipeDTO.ShapelessRecipeDTO;
+import com.hirakurai.hiracustomcrafts.models.recipeDTO.FurnaceRecipeDTO;
 import org.bukkit.Material;
+import org.bukkit.NamespacedKey;
 
 import java.util.List;
 
-public class ToolShapelessRecipeExtendedDTO extends ShapelessRecipeDTO {
+public class WeaponFurnaceRecipeExtendedDTO extends FurnaceRecipeDTO {
     private String slot;
     private Integer attackDamageToAdd;
     private Integer attackSpeedToAdd;
 
-    public ToolShapelessRecipeExtendedDTO(String recipeKey,
+    public WeaponFurnaceRecipeExtendedDTO(String recipeKey,
                                           Material resultItemMaterial,
                                           String resultItemName,
                                           List<String> resultItemLore,
-                                          List<ShapelessCraftIngredient> craftIngredients,
+                                          NamespacedKey craftIngredient,
+                                          Integer experience,
+                                          Integer cookingTime,
                                           String slot,
                                           Integer attackDamageToAdd,
                                           Integer attackSpeedToAdd) {
-        super(recipeKey, resultItemMaterial, resultItemName, resultItemLore, craftIngredients);
+        super(recipeKey, resultItemMaterial, resultItemName, resultItemLore, craftIngredient, experience, cookingTime);
         this.slot = slot;
         this.attackDamageToAdd = attackDamageToAdd;
         this.attackSpeedToAdd = attackSpeedToAdd;
